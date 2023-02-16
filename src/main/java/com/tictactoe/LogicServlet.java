@@ -29,7 +29,7 @@ public class LogicServlet extends HttpServlet {
         }
 
         field.getField().put(index, Sign.CROSS);
-        if (checkWin(resp,currentSession,field)){
+        if (checkWin(resp, currentSession, field)) {
             return;
         }
 
@@ -37,15 +37,15 @@ public class LogicServlet extends HttpServlet {
 
         if (emptyFieldIndex >= 0) {
             field.getField().put(emptyFieldIndex, Sign.NOUGHT);
-            if (checkWin(resp,currentSession,field)){
+            if (checkWin(resp, currentSession, field)) {
                 return;
             }
         } else {
-            currentSession.setAttribute("draw",true);
+            currentSession.setAttribute("draw", true);
 
             List<Sign> data = field.getFieldData();
 
-            currentSession.setAttribute("data",data);
+            currentSession.setAttribute("data", data);
 
             resp.sendRedirect("/index.jsp");
             return;
@@ -61,12 +61,12 @@ public class LogicServlet extends HttpServlet {
 
     private boolean checkWin(HttpServletResponse response, HttpSession currentSession, Field field) throws IOException {
         Sign winner = field.checkWin();
-        if (Sign.CROSS == winner || Sign.NOUGHT == winner){
+        if (Sign.CROSS == winner || Sign.NOUGHT == winner) {
             currentSession.setAttribute("winner", winner);
 
             List<Sign> data = field.getFieldData();
 
-            currentSession.setAttribute("data",data);
+            currentSession.setAttribute("data", data);
 
             response.sendRedirect("/index.jsp");
             return true;
